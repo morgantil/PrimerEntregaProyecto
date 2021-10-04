@@ -1,0 +1,9 @@
+.boton{
+    display: inline;
+    border: black solid 1px;
+    margin-right:5px;
+    margin-left:5px;
+}
+.numero{
+    display: inline;
+}

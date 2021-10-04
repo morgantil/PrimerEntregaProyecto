@@ -1,0 +1,9 @@
+.navbar{
+background-color:#F0A500;
+}
+.contenedorEnlaces{
+    display: flex;
+justify-content: center;
+
+}
+
