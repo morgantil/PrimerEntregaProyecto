@@ -4,7 +4,7 @@ import ItemList from "../ItemList/ItemList";
 import { mockProducts } from "../../data/data";
 import { useParams } from "react-router";
 
-const ItemListContainer = (  {greeting} ) => {
+const ItemListContainer = ( ) => {
 
   const [productos,setProductos]=useState([]);
   const {catId}=useParams();
@@ -40,7 +40,7 @@ const ItemListContainer = (  {greeting} ) => {
 
     return (<>
 
-   <h1> { greeting }</h1>
+
 
  <div><ItemList productos={productos}/>
  

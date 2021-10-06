@@ -6,8 +6,11 @@ import CartWidget from '../CartWidget/CartWidget';
 
 
 const NavBar = () => {
+
     return (<>
         <div>
+
+
        <Navbar expand="lg">
   <Container>
     <Link to="/"><Navbar.Brand >LOGO</Navbar.Brand></Link>

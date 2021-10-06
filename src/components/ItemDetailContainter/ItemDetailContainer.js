@@ -1,37 +1,41 @@
 import React, { useState, useEffect } from "react";
 import ItemDetail from "../ItemDetail/ItemDetail";
-
+import { useParams } from "react-router";
+import { mockProducts } from "../../data/data";
 const ItemDetailContainer = () => {
-  const [infoProduct, setInfoProduct] = useState({});
-
+  const [infoProduct, setInfoProduct] = useState([]);
+  const {productId}=useParams();
+  console.log('Prueba userParams'+productId);
   const getProduct = new Promise((resolve) => {
     setTimeout(() => {
-      const mockProducts = {
-        id: "1",
-        title: "Remera Nike",
-        description: "Remera Algodon",
-        price: 1000,
-        img: "remeraNike1.jpg",
-        stock: 20,
-      };
-
+    
       resolve(mockProducts);
     }, 2000);
   });
 
   useEffect(() => {
-    getProduct.then((res) => {
-      console.log("Respuesta de promesa 2", res);
-      setInfoProduct(res);
+    //  getProduct.then((res) => {
+    //    console.log("Respuesta de promesa 2", res);
+    //    setInfoProduct(res);
+
+    getProduct.then((res)=>{
+
+     
+
+      productId ? setInfoProduct(res.filter( (product) => product.id === productId  ))
+                : setInfoProduct( res ) 
+
+
+    
     });
-  });
+  },[productId]);
 
   return (
     <div className="container3">
       <span><h3>Detalle del Producto</h3></span>
-      {console.log("InfoProduct:", infoProduct)}{" "}
       
-      <ItemDetail data={infoProduct} />
+      
+      <ItemDetail infoProduct={infoProduct} />
     </div>
   );
 };
