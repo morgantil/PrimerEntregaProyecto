@@ -5,6 +5,7 @@ import ItemListContainer from "../components/ItemListContainer/ItemListContainer
 import NavBar from "../components/NavBar/NavBar";
 import Home from "../pages/Home"
 import Detail from "../pages/Detail"
+import Carrito from "../pages/Carrito";
 import NoFound from "../pages/NoFound"
 const AppRouter = () => {
   return (
@@ -13,6 +14,7 @@ const AppRouter = () => {
       <Switch>
       <Route exact path="/category/:catId" component={Home}/>
         <Route exact path="/detalle/:productId" component={Detail}/>
+        <Route exact path="/carrito" component={Carrito}/>
       <Route exact path="/" component={Home}/>
         <Route  path="*" component={NoFound}>
           
