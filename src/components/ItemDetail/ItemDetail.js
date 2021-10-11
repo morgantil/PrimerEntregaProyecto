@@ -3,36 +3,46 @@ import "./ItemDetail.css";
 import ItemCount from "../ItemCount/ItemCount";
 import { Button } from "react-bootstrap";
 import { Link } from 'react-router-dom';
+
+var stock;
+
 const ItemDetail = ({ infoProduct }) => {
 
 
- const [stock, setStock] = useState(10);
+
 const [cantidad, setCantidad] = useState(0);
- const [disableButton, setDisableButton] = useState(false);
- const [disableButton2, setDisableButton2] = useState(true);
+ //const [disableButton, setDisableButton] = useState(false);
+ //const [disableButton2, setDisableButton2] = useState(true);
+
+
+
+const stock=infoProduct.map(product=>product.stock)
+
+
 
 const sumar = () => {
  
-  if (cantidad < stock) {
+  if (cantidad <stock) {
     setCantidad(cantidad + 1);
   }
-   if (cantidad === stock) {
-     setDisableButton(true);
-   }
+  //  if (cantidad === stock) {
+  //    setDisableButton(true);
+   
+  //  }
 
-   if ((cantidad) => 0) {
-     setDisableButton2(false);
-   }
+  //  if ((cantidad) => 0) {
+  //    setDisableButton2(false);
+  //  }
 }
 
 const restar = () => {
   if (cantidad > 0) {
     setCantidad(cantidad - 1);
   }
-  if (cantidad < 1) {
-    setDisableButton2(true);
-    setDisableButton(false);
-  }
+    // if (cantidad < 1) {
+    //   setDisableButton2(true);
+    //   setDisableButton(false);
+    // }
 };
 
 
@@ -43,7 +53,9 @@ const restar = () => {
   return (
     <>
       {infoProduct.map((product) => {
+        
         return (
+  
           <div className="detail-item">
             <div className="row">
               <div className="col-xs-12 col-md-6">

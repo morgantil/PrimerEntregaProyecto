@@ -14,7 +14,7 @@ export const mockProducts=[
         description:'Remera Algodon',
         price:1100,
         img:'remeraAdidas1.jpg',
-        stock:20,
+        stock:21,
         category:'indumentaria'
     },
     {
@@ -23,7 +23,7 @@ export const mockProducts=[
         description:'Remera Algodon',
         price:1200,
         img:'remeraPuma1.jpg',
-        stock:20,
+        stock:22,
         category:'indumentaria'
     },
     {
@@ -32,7 +32,7 @@ export const mockProducts=[
       description:'Talles del 38 al 41',
       price:1800,
       img:'zapatillasNike1.jfif',
-      stock:20,
+      stock:23,
       category:'calzado'
   },
   {
@@ -41,7 +41,7 @@ export const mockProducts=[
       description:'Talles 36 al 42',
       price:2200,
       img:'zapatillasPuma1.jfif',
-      stock:20,
+      stock:24,
       category:'calzado'
   },
   {
@@ -50,7 +50,7 @@ export const mockProducts=[
       description:'Talles Disponibles del 35 al 45',
       price:3200,
       img:'zapatillasTopper1.jfif',
-      stock:20,
+      stock:25,
       category:'calzado'
   }
 ]
