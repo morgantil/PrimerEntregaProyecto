@@ -8,8 +8,7 @@ const ItemListContainer = ( ) => {
 
   const [productos,setProductos]=useState([]);
   const {catId}=useParams();
-  console.log(useParams());
-  console.log(catId);
+ 
 
   const promesa = new Promise((resolve)=>{
 

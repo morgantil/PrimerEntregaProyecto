@@ -1,22 +1,31 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import "./ItemDetail.css";
 import ItemCount from "../ItemCount/ItemCount";
 import { Button } from "react-bootstrap";
 import { Link } from 'react-router-dom';
+//CONTEXT
+import CartContex  from '../../context/CartContex';
+
+
 
 var stock;
 
 const ItemDetail = ({ infoProduct }) => {
+console.log('lal'+infoProduct);
 
+
+
+const {cartItems,addItem,isInCart}=useContext(CartContex);
 
 
 const [cantidad, setCantidad] = useState(0);
+//const [stock, setstock] = useState(infoProduct.map(product=>product.stock)); OTRA MANERA EN LUGAR DE LA LINEA 18
  //const [disableButton, setDisableButton] = useState(false);
  //const [disableButton2, setDisableButton2] = useState(true);
 
+const stock=infoProduct.map(product=>product.stock);
 
 
-const stock=infoProduct.map(product=>product.stock)
 
 
 
@@ -48,12 +57,12 @@ const restar = () => {
 
 
 
-  
+
 
   return (
     <>
       {infoProduct.map((product) => {
-        
+        const nombre=infoProduct.map(product=>product.title)
         return (
   
           <div className="detail-item">
@@ -68,7 +77,7 @@ const restar = () => {
                   <p> Precio: {infoProduct[0].price} $ </p>
                   <p>{infoProduct[0].description} </p>
                   <ItemCount sumar={sumar} restar={restar} cantidad={cantidad} />
-                  <Link to={`/carrito`}><Button comprar className="boton" variant="primary">
+                  <Link to={`/carrito`}><Button onClick={addItem(nombre,cantidad)} comprar className="boton" variant="primary">
                     Comprar
                   </Button></Link>
                 </div>

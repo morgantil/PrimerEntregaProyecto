@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import {Container,Navbar,Nav} from "react-bootstrap"
 import CartWidget from '../CartWidget/CartWidget';
 
-
 const NavBar = () => {
+
 
     return (<>
         <div>
@@ -24,7 +24,7 @@ const NavBar = () => {
         
       </Nav>
     </Navbar.Collapse>
-    <div><CartWidget/></div>
+    <div> <Link to={`/carrito`}><CartWidget/></Link></div>
   </Container>
 </Navbar>
 
