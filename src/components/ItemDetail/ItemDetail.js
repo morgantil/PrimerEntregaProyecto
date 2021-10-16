@@ -11,11 +11,11 @@ import CartContex  from '../../context/CartContex';
 var stock;
 
 const ItemDetail = ({ infoProduct }) => {
-console.log('lal'+infoProduct);
 
 
 
-const {cartItems,addItem,isInCart}=useContext(CartContex);
+
+const {addProduct}=useContext(CartContex);
 
 
 const [cantidad, setCantidad] = useState(0);
@@ -28,20 +28,12 @@ const stock=infoProduct.map(product=>product.stock);
 
 
 
-
+//INICIO FUNCIONES 
 const sumar = () => {
  
   if (cantidad <stock) {
     setCantidad(cantidad + 1);
   }
-  //  if (cantidad === stock) {
-  //    setDisableButton(true);
-   
-  //  }
-
-  //  if ((cantidad) => 0) {
-  //    setDisableButton2(false);
-  //  }
 }
 
 const restar = () => {
@@ -54,7 +46,16 @@ const restar = () => {
     // }
 };
 
+const addToCart = (  ) => {
+  console.log("LO QUE ENVIO", infoProduct[0])
 
+  addProduct( infoProduct[0], cantidad )
+}
+
+
+
+
+//FIN FUNCIONES
 
 
 
@@ -76,11 +77,17 @@ const restar = () => {
                   <h2> {infoProduct[0].title} </h2>
                   <p> Precio: {infoProduct[0].price} $ </p>
                   <p>{infoProduct[0].description} </p>
-                  <ItemCount sumar={sumar} restar={restar} cantidad={cantidad} />
-                  <Link to={`/carrito`}><Button onClick={addItem(nombre,cantidad)} comprar className="boton" variant="primary">
-                    Comprar
-                  </Button></Link>
+                  <ItemCount 
+                  sumar={sumar} 
+                  restar={restar} 
+                  cantidad={cantidad}
+                  />
+                
                 </div>
+              </div>
+              <div>
+              <Button onClick={addToCart} className="btn btn-primary ml-5" variant="primary">Comprar
+              </Button>
               </div>
             </div>
           </div>
