@@ -5,6 +5,8 @@ import { Button } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 //CONTEXT
 import CartContex  from '../../context/CartContex';
+import Carrito from "../../pages/Carrito";
+
 
 
 
@@ -15,7 +17,7 @@ const ItemDetail = ({ infoProduct }) => {
 
 
 
-const {addProduct}=useContext(CartContex);
+const {addProduct,setCartItems}=useContext(CartContex);
 
 
 const [cantidad, setCantidad] = useState(0);
@@ -24,6 +26,7 @@ const [cantidad, setCantidad] = useState(0);
  //const [disableButton2, setDisableButton2] = useState(true);
 
 const stock=infoProduct.map(product=>product.stock);
+
 
 
 
@@ -48,8 +51,9 @@ const restar = () => {
 
 const addToCart = (  ) => {
   console.log("LO QUE ENVIO", infoProduct[0])
-
-  addProduct( infoProduct[0], cantidad )
+  
+  addProduct( infoProduct[0], cantidad,infoProduct[0].price )
+  
 }
 
 

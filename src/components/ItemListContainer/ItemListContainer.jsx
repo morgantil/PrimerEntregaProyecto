@@ -18,8 +18,7 @@ const ItemListContainer = ( ) => {
           resolve(mockProducts);
 
 
-      },2000)
-
+      }, 2000);
 
 
   })

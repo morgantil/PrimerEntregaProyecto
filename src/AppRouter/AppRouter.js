@@ -26,7 +26,7 @@ const AppRouter = () => {
      
 
 
-      </Switch>{" "}
+      </Switch>
       </CartProvider>
     </BrowserRouter>
   );
