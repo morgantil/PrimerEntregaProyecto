@@ -1,12 +1,12 @@
-import React from 'react'
+import React,{useState,useContext} from 'react'
 import "./NavBar.css";
 import { Link } from "react-router-dom";
 import {Container,Navbar,Nav} from "react-bootstrap"
 import CartWidget from '../CartWidget/CartWidget';
-
+import CartContex  from '../../context/CartContex';
 const NavBar = () => {
-
-
+  const {tof} = useContext(CartContex);
+  console.log("NAVBAR VOF1",tof);
     return (<>
         <div>
 
@@ -24,7 +24,7 @@ const NavBar = () => {
         
       </Nav>
     </Navbar.Collapse>
-    <div> <Link to={`/carrito`}><CartWidget/></Link></div>
+    <div> <Link to={`/carrito`}><button className={`cart-widget ${tof ? 'active':''}`}><CartWidget></CartWidget></button></Link></div>
   </Container>
 </Navbar>
 

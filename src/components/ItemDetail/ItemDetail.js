@@ -1,75 +1,65 @@
-import React, { useState,useContext } from "react";
+import React, { useState, useContext } from "react";
 import "./ItemDetail.css";
 import ItemCount from "../ItemCount/ItemCount";
 import { Button } from "react-bootstrap";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 //CONTEXT
-import CartContex  from '../../context/CartContex';
+import CartContex from "../../context/CartContex";
 import Carrito from "../../pages/Carrito";
-
-
-
 
 var stock;
 
 const ItemDetail = ({ infoProduct }) => {
+  const { addProduct, setCartItems,setTof} = useContext(CartContex);
 
+  const [cantidad, setCantidad] = useState(0);
 
+    const [showCart,setShowCart]=useState(true)
 
+    const ocultar=()=>{
+      cantidad>0 ? setShowCart(false):setShowCart(true);
+      cantidad>0 ? setTof(false):setTof(true);
+    }
 
-const {addProduct,setCartItems}=useContext(CartContex);
+    
 
+  const stock = infoProduct.map((product) => product.stock);
 
-const [cantidad, setCantidad] = useState(0);
-//const [stock, setstock] = useState(infoProduct.map(product=>product.stock)); OTRA MANERA EN LUGAR DE LA LINEA 18
- //const [disableButton, setDisableButton] = useState(false);
- //const [disableButton2, setDisableButton2] = useState(true);
+  //INICIO FUNCIONES
+  const sumar = () => {
+    if (cantidad < stock) {
+      setCantidad(cantidad + 1);
+    }
+  };
 
-const stock=infoProduct.map(product=>product.stock);
-
-
-
-
-
-//INICIO FUNCIONES 
-const sumar = () => {
- 
-  if (cantidad <stock) {
-    setCantidad(cantidad + 1);
-  }
-}
-
-const restar = () => {
-  if (cantidad > 0) {
-    setCantidad(cantidad - 1);
-  }
+  const restar = () => {
+    if (cantidad > 0) {
+      setCantidad(cantidad - 1);
+    }
     // if (cantidad < 1) {
     //   setDisableButton2(true);
     //   setDisableButton(false);
     // }
-};
+  };
 
-const addToCart = (  ) => {
-  console.log("LO QUE ENVIO", infoProduct[0])
-  
-  addProduct( infoProduct[0], cantidad,infoProduct[0].price )
-  
-}
+  const addToCart = () => {
+    addProduct(infoProduct[0], cantidad, infoProduct[0].price);
+  };
 
 
 
+  const handleClick=()=>{
+    addToCart();
+    ocultar();
+  }
 
-//FIN FUNCIONES
-
-
-
+  //FIN FUNCIONES
 
   return (
     <>
       {infoProduct.map((product) => {
-        const nombre=infoProduct.map(product=>product.title)
+        const nombre = infoProduct.map((product) => product.title);
         return (
-  
           <div className="detail-item">
             <div className="row">
               <div className="col-xs-12 col-md-6">
@@ -81,17 +71,24 @@ const addToCart = (  ) => {
                   <h2> {infoProduct[0].title} </h2>
                   <p> Precio: {infoProduct[0].price} $ </p>
                   <p>{infoProduct[0].description} </p>
-                  <ItemCount 
-                  sumar={sumar} 
-                  restar={restar} 
-                  cantidad={cantidad}
+                  <ItemCount
+                    sumar={sumar}
+                    restar={restar}
+                    cantidad={cantidad}
                   />
-                
                 </div>
               </div>
               <div>
-              <Button onClick={addToCart} className="btn btn-primary ml-5" variant="primary">Comprar
-              </Button>
+                <Button
+                  onClick={handleClick}
+                  className={` btn btn-primary m-5cart-widget ${showCart ? '':'active'}`}
+                  variant="primary"
+                >
+                  Comprar
+                </Button>
+                 <Button className={`cart-widget ${showCart ? 'active':''}`} >
+        Terminar Compra
+        </Button> 
               </div>
             </div>
           </div>

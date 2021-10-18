@@ -4,6 +4,9 @@ const CartContex = createContext();
 
 const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
+  const [cantItems, setCantItems] = useState([]);
+  const [tof,setTof]=useState();
+
 
   console.log("CARRITO: ", cartItems);
 
@@ -22,10 +25,14 @@ const CartProvider = ({ children }) => {
   const totalPrice = () => {
     return cartItems.reduce((acumulado, item) => acumulado + (item.counter * item.precio), 0);
 }
+const totalItems = () => {
+  return cartItems.reduce((acumulado, item) => acumulado + (item.counter), 0);
+}
 
   const addProduct = (item, counter, precio) => {
     // Guardo el producto en una constante para poder tratarlo
     let cartElement = { item, counter, precio };
+ 
     // Creo una var-carrito auxiliar
     let cartAux = [];
     // Consulto si el producto esta en el carrito
@@ -59,6 +66,9 @@ const CartProvider = ({ children }) => {
     cartItems,
     addProduct,
     deleteItem,
+    totalItems,
+    setTof,
+    tof,
     totalPrice
     
   };

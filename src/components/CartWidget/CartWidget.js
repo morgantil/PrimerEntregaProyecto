@@ -1,14 +1,25 @@
-import React from 'react'
-
+import React, {useContext } from "react";
+import "./CartWidget.css";
 import { Cart } from 'react-bootstrap-icons';
+import CartContex  from '../../context/CartContex';
+
 
 const CartWidget = () => {
-    return (
-        <div>
+    const {totalItems} = useContext(CartContex);
+    
+    
+ 
+    
+     
+    
+
+    return (<>
+        <div >
        
-           
-            <Cart />
-        </div>
+          
+       <Cart/> <p id="cant">{totalItems()}</p>
+       
+        </div></>
     )
 }
 
