@@ -86,9 +86,9 @@ const ItemDetail = ({ infoProduct }) => {
                 >
                   Comprar
                 </Button>
-                 <Button className={`cart-widget ${showCart ? 'active':''}`} >
+                <Link to={`/carrito`}> <Button className={`cart-widget ${showCart ? 'active':''}`} >
         Terminar Compra
-        </Button> 
+        </Button> </Link>
               </div>
             </div>
           </div>

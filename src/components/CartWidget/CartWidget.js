@@ -1,8 +1,9 @@
+
 import React, {useContext } from "react";
 import "./CartWidget.css";
 import { Cart } from 'react-bootstrap-icons';
 import CartContex  from '../../context/CartContex';
-
+import { Link } from "react-router-dom";
 
 const CartWidget = () => {
     const {totalItems} = useContext(CartContex);
@@ -13,16 +14,23 @@ const CartWidget = () => {
      
     
 
-    return (<>
-        <div >
-       
-          
-       <Cart/> <p id="cant">{totalItems()}</p>
-       
-        </div></>
+    return (
+         <>
+         {totalItems() > 0 && (
+            <div>
+               <div>
+                  {" "}
+                  <Link to={`/carrito`}>
+                     <button className={`cart-widget`}>
+                        <Cart /> <p id="cant">{totalItems()}</p>
+                     </button>
+                  </Link>
+               </div>
+            </div>
+         )}
+      </>
     )
 }
 
 export default CartWidget
-
 
