@@ -2,29 +2,26 @@ import React, { useState, useEffect } from "react";
 import ItemDetail from "../ItemDetail/ItemDetail";
 import { useParams } from "react-router";
 import { mockProducts } from "../../data/data";
+import db from '../../firebase'
+import { getFirestore,collection,getDocs,doc,query,where} from "firebase/firestore/lite";
+import { Collection, ThreeDotsVertical } from "react-bootstrap-icons";
 const ItemDetailContainer = () => {
   const [infoProduct, setInfoProduct] = useState([]);
 
   const {productId}=useParams();
 
-  const getProduct = new Promise((resolve) => {
-    setTimeout(() => {
-    
-      resolve(mockProducts);
-    }, 2000);
-  });
+  async function getProducts(db){
+    const productosCol=query(collection(db, "productos"),where("id", "==", Number(productId) ));
+    const productosSnapshop=await getDocs(productosCol);
+    const productoslist=productosSnapshop.docs.map(doc=>doc.data());
+	
+    return setInfoProduct(productoslist);
+  }    
 
-  useEffect(() => {
-
-    getProduct.then((res)=>{
-
-      productId ? setInfoProduct(res.filter( (product) => product.id === productId  ))
-                : setInfoProduct( res ) 
-
-    });
-  },[productId]);
-
-
+useEffect(()=>{
+  getProducts(db)
+  
+},[productId])
     
   
   

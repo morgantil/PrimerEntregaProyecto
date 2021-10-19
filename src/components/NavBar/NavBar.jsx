@@ -6,7 +6,7 @@ import CartWidget from '../CartWidget/CartWidget';
 import CartContex  from '../../context/CartContex';
 const NavBar = () => {
   const {tof} = useContext(CartContex);
-  console.log("NAVBAR VOF1",tof);
+
     return (<>
         <div>
 
