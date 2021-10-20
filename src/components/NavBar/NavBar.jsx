@@ -24,7 +24,7 @@ const NavBar = () => {
         
       </Nav>
     </Navbar.Collapse>
-    <div> <Link to={`/carrito`}><button className={`cart-widget ${tof ? 'active':''}`}><CartWidget></CartWidget></button></Link></div>
+    <Link to={`/carrito`}><div className={`cart-widget ${tof ? 'active':''}`}><CartWidget/></div></Link>
   </Container>
 </Navbar>
 
