@@ -1,11 +1,43 @@
 import React, { createContext, useContext } from "react";
 import CartContex from "../context/CartContex";
 import { Link } from 'react-router-dom';
+import db from '../../src/firebase'
+import { getFirestore,collection,getDocs,doc,query,where,addDoc} from "firebase/firestore/lite";
 const Carrito = () => {
   const { cartItems, deleteItem,totalPrice } = useContext(CartContex);
   console.log("leonardo", cartItems);
 
   //INICIO FUNCIONES
+
+const newOrder={
+buyer:{
+
+name:'Leonardo',
+email:'lala@lla.com',
+phone:115555
+},
+
+items:cartItems,
+
+total:totalPrice(),
+
+}
+
+
+  const addOrder=()=>{
+
+console.log("Generar nueva orden",newOrder);
+
+pushOrderFirebase(newOrder)
+
+  }
+
+const pushOrderFirebase= async(newOrder)=>{
+
+  const orderFirebase = collection(db,"ordenes");
+  const order=await addDoc(orderFirebase,newOrder);
+  console.log('Se genero la orden con el Id',order.id);
+}
 
   //FIN FUNCIONES
 
@@ -64,7 +96,7 @@ const Carrito = () => {
                 </div>
               </div>
               <div>
-              <button>Terminar Compra</button>
+              <button onClick={()=>addOrder()}>Terminar Compra2</button>
                  </div>
             </div>
           ) : (

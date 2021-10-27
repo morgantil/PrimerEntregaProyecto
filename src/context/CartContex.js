@@ -1,9 +1,10 @@
 import React, { createContext, useState } from "react";
-
+import db from '../../src/firebase'
+import {doc,updateDoc} from "firebase/firestore/lite";
 const CartContex = createContext();
 
 const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState(JSON.parse(localStorage.getItem('cartProducts'))||[]);
   const [cantItems, setCantItems] = useState([]);
   const [tof,setTof]=useState();
 
@@ -37,6 +38,7 @@ const totalItems = () => {
     let cartAux = [];
     // Consulto si el producto esta en el carrito
     if (isInCart(item)) {
+      
       console.log(`Esta en el 🛒`);
       // Busco el producto por ID
       cartElement = cartItems.find((el) => el.item.id === item.id);
@@ -48,13 +50,39 @@ const totalItems = () => {
 
       // Retorno el carrito tal cual como estaba
       cartAux = [...cartItems];
+      //addProductFirebaseCart();
+      addProductStorage();
     } else {
       console.log(`NO esta en el 🛒`);
       cartAux = [cartElement, ...cartItems];
     }
 
     setCartItems(cartAux);
+
+    /*NUEVO--------
+    const addProductFirebaseCart=async()=>{
+
+      const cartData=doc(db,'cart','aYE94Wf5Ac8u18d6m7gD')
+      await updateDoc(cartData,{
+        items:cartItems
+
+      })
+    }
+
+    NUEVO-------*/
+
+
   };
+
+
+  const addProductStorage=()=>{
+    
+    localStorage.setItem("cartProducts",JSON.stringify(cartItems))
+
+
+  }
+
+
 
   const isInCart = (item) => {
     // Busco si existe el item en mi cart
