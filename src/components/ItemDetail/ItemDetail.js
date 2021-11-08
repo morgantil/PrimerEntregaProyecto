@@ -5,23 +5,18 @@ import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 //CONTEXT
 import CartContex from "../../context/CartContex";
-import Carrito from "../../pages/Carrito";
-
-var stock;
 
 const ItemDetail = ({ infoProduct }) => {
-  const { addProduct, setCartItems,setTof} = useContext(CartContex);
+  const { addProduct, setCartItems, setTof } = useContext(CartContex);
 
   const [cantidad, setCantidad] = useState(0);
 
-    const [showCart,setShowCart]=useState(true)
+  const [showCart, setShowCart] = useState(true);
 
-    const ocultar=()=>{
-      cantidad>0 ? setShowCart(false):setShowCart(true);
-      cantidad>0 ? setTof(false):setTof(true);
-    }
-
-    
+  const ocultar = () => {
+    cantidad > 0 ? setShowCart(false) : setShowCart(true);
+    cantidad > 0 ? setTof(false) : setTof(true);
+  };
 
   const stock = infoProduct.map((product) => product.stock);
 
@@ -36,27 +31,24 @@ const ItemDetail = ({ infoProduct }) => {
     if (cantidad > 0) {
       setCantidad(cantidad - 1);
     }
-    // if (cantidad < 1) {
-    //   setDisableButton2(true);
-    //   setDisableButton(false);
-    // }
+
   };
 
   const addToCart = () => {
     addProduct(infoProduct[0], cantidad, infoProduct[0].price);
   };
 
-
-
-  const handleClick=()=>{
+  const handleClick = () => {
     addToCart();
     ocultar();
-  }
+  };
 
   //FIN FUNCIONES
 
   return (
+
     <>
+    
       {infoProduct.map((product) => {
         const nombre = infoProduct.map((product) => product.title);
         return (
@@ -78,23 +70,33 @@ const ItemDetail = ({ infoProduct }) => {
                   />
                 </div>
               </div>
-              <div>
-                <Button
+                </div>
+                <div className={"row"}>
+                  <div className={"col-12"}>
+                <Button 
                   onClick={handleClick}
-                  className={` btn btn-primary m-5cart-widget ${showCart ? '':'active'}`}
+                  className={` btn btn-success m-5cart-widget btnPosition ${
+                    showCart ? "" : "active"
+                  }`}
                   variant="primary"
                 >
                   Comprar
                 </Button>
-                <Link to={`/carrito`}> <Button className={`cart-widget ${showCart ? 'active':''}`} >
-        Terminar Compra
-        </Button> </Link>
+                <Link to={`/carrito`}>
+                  {" "}
+                  <Button className={` btnPosition btn btn-danger cart-widget ${showCart ? "active" : ""}`}>
+                    Terminar Compra
+                  </Button>{" "}
+                </Link>
+                </div>
               </div>
             </div>
-          </div>
+          
         );
       })}
+      
     </>
+   
   );
 };
 

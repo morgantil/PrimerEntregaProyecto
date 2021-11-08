@@ -4,9 +4,9 @@ import Item from "../Item/Item";
 const ItemList = ({ productos }) => {
   return (
     <>
-      {" "}
-      <div className="ItemList container">
-        {" "}
+
+    <div className="row">
+    
         {productos.map((producto) => {
           return (
             <Item
@@ -18,8 +18,8 @@ const ItemList = ({ productos }) => {
               price={producto.price}
             />
           );
-        })}{" "}
-      </div>{" "}
+        })}
+      </div>
     </>
   );
 };

@@ -1,54 +1,54 @@
 import React, { createContext, useContext } from "react";
 import CartContex from "../context/CartContex";
-import { Link } from 'react-router-dom';
-import db from '../../src/firebase'
-import { getFirestore,collection,getDocs,doc,query,where,addDoc} from "firebase/firestore/lite";
+import { Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
+import db from "../../src/firebase";
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  doc,
+  query,
+  where,
+  addDoc,
+} from "firebase/firestore/lite";
 const Carrito = () => {
-  const { cartItems, deleteItem,totalPrice } = useContext(CartContex);
-  console.log("leonardo", cartItems);
+  const { cartItems, deleteItem, totalPrice } = useContext(CartContex);
+  
 
   //INICIO FUNCIONES
 
-const newOrder={
-buyer:{
+  const newOrder = {
+    buyer: {
+      name: "Leonardo",
+      email: "lala@lla.com",
+      phone: 115555,
+    },
 
-name:'Leonardo',
-email:'lala@lla.com',
-phone:115555
-},
+    items: cartItems,
 
-items:cartItems,
+    total: totalPrice(),
+  };
 
-total:totalPrice(),
+  const addOrder = () => {
+  
 
-}
+    pushOrderFirebase(newOrder);
+  };
 
+  const pushOrderFirebase = async (newOrder) => {
+    const orderFirebase = collection(db, "ordenes");
+    const order = await addDoc(orderFirebase, newOrder);
 
-  const addOrder=()=>{
-
-console.log("Generar nueva orden",newOrder);
-
-pushOrderFirebase(newOrder)
-
-  }
-
-const pushOrderFirebase= async(newOrder)=>{
-
-  const orderFirebase = collection(db,"ordenes");
-  const order=await addDoc(orderFirebase,newOrder);
-  console.log('Se genero la orden con el Id',order.id);
-}
+  };
 
   //FIN FUNCIONES
 
   return (
+    
     <div className="container cart">
       <div className="products single">
-        <div className="title">
-          <h1>
-            <div className="icon-my-computer"></div>Carrito
-          </h1>
-        </div>
+       
 
         <div className="container-inner">
           <h2>Tu compra</h2>
@@ -67,7 +67,6 @@ const pushOrderFirebase= async(newOrder)=>{
                 <div className="col-12 col-md-2">
                   <p>Eliminar item</p>
                 </div>
-            
               </div>
               {cartItems.map(({ item, precio, counter }) => (
                 <div key={item.id} className="row">
@@ -80,35 +79,38 @@ const pushOrderFirebase= async(newOrder)=>{
                     <p>$ {precio}</p>
                   </div>
                   <div className="col-12 col-md-3">
-                    <p>$ {precio*counter}</p>
+                    <p>$ {precio * counter}</p>
                   </div>
                   <div className="col-12 col-md-2">
-                    <button onClick={() => deleteItem(item)}>
-                      <h4>borrar</h4>
-                    </button>
+               
+                    <img onClick={() => deleteItem(item)} className={""} src={`/img/basura.png`} alt="" /> 
+                      
+                    
                   </div>
                 </div>
               ))}
 
               <div>
                 <div className="col-12 col-md-3">
-                  <p className="mt-2"><b>Total: $ {totalPrice() ? totalPrice() : 0}</b></p>
+                  <p className="mt-2">
+                    <b>Total: $ {totalPrice() ? totalPrice() : 0}</b>
+                  </p>
                 </div>
               </div>
               <div>
-              <button onClick={()=>addOrder()}>Terminar Compra2</button>
-                 </div>
+                <Button className={"btn btn-dark"} onClick={() => addOrder()}>Terminar Compra</Button>
+              </div>
             </div>
           ) : (
             "No hay productos en el carrito :("
           )}
         </div>
         <div className="statusbar">
-               <Link to={`/`}>
-                  <div className="left">Volver a productos</div>
-               </Link>
-               <div className="right">&nbsp;</div>
-            </div>
+          <Link to={`/`}>
+            <div className="left">Volver a productos</div>
+          </Link>
+          <div className="right">&nbsp;</div>
+        </div>
       </div>
     </div>
   );

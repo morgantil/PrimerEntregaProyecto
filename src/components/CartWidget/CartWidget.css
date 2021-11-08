@@ -5,3 +5,6 @@
 .active{
     display: none;
 }
+#cant{
+    color: rgb(36, 36, 33);
+}

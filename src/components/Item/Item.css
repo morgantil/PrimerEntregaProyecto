@@ -1,15 +1,26 @@
-.product {
-    width: 100%;
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -moz-flex;
-    display: -webkit-flex;
-    display: flex;
-   
+.body2{
+background-color: #185ADB;
 }
 
-.wrap    { 
-    -webkit-flex-wrap: wrap;
-    flex-wrap: wrap;
-  }
+
+.zoom {
+  padding: 60px;
+  transition: transform .2s;
+  margin: 0 auto;
+}
+
+.zoom:hover {
+  -ms-transform: scale(1.3); /* IE 9 */
+  -webkit-transform: scale(1.3); /* Safari 3-8 */
+  transform: scale(1.3); 
+}
+
+.Cards{
+  width:100%;
+  border: none;
+}
+
+.img{
+  width:400px;
+  height:400px;
+}

@@ -1,8 +1,8 @@
 .navbar{
-background-color:#F0A500;
+background-color:#0A1931;
 }
 .contenedorEnlaces{
-    display: flex;
+display: flex;
 justify-content: center;
 
 }
@@ -11,4 +11,14 @@ justify-content: center;
 }
 .active2{
     display: block;
+}
+
+a{
+    text-decoration: none;
+    color: #fff;
+}
+
+.logo{
+    width: 100px;
+    height: 100px;
 }
